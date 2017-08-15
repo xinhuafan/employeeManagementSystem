@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="css/ems.css"></link>
+<form class="layout-addEmployee">
+  <h3 class="header-style">Add New Employee</h3>
+  <div class="layout-personalInfo">
+  <table>
+    <tr>
+      <td><img ng-src="{{thumbnail.dataUrl || default}}" class="img-style"></td>
+    </tr>
+    <tr>
+      <td>       
+        <br>
+        <label class="btn btn-info">
+        Browse
+        <input type="file" file-model="file.upload" name="userProfile" style="display: none;" onchange="angular.element(this).scope().photoChanged(this.files)">
+        </label>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <table class="personalInfo">
+    <tr>
+      <td><label>First Name:</label></td>
+      <td><input class="ems-input ems-border input-length" type="text" ng-model="newemployee.fName" placeholder="First Name"></td>
+    </tr>
+    <tr>
+      <td><label>Last Name:</label></td>
+      <td><input class="ems-input ems-border input-length" type="text" ng-model="newemployee.lName" placeholder="Last Name"></td>
+    </tr>
+    <tr>
+      <td><label>Title:</label></td>
+      <td><input class="ems-input ems-border input-length" type="text" ng-model="newemployee.title" placeholder="Job Title"></td>
+    </tr>  
+    <tr>
+      <td><label>Phone:</label></td>
+      <td><input class="ems-input ems-border input-length" type="tel" ng-model="newemployee.phone" placeholder="Phone Number"></td>
+    </tr> 
+    <tr>
+      <td><label>Email:</label></td>
+      <td><input class="ems-input ems-border input-length" type="email" ng-model="newemployee.email" placeholder="Email"></td>
+    </tr>
+    <tr>
+      <td><label>Department:</label></td>
+      <td><input class="ems-input ems-border input-length" type="text" ng-model="newemployee.department" placeholder="Department"></td>
+    </tr>
+    <tr>
+      <td><label>Manager:</label></td>
+      <td>
+        <select ng-model="newemployee.manager"  class="ems-input ems-border input-length">
+          <option value="">Please Select Manager</option>
+          <option ng-repeat="employee in employees" value="{{employee.fullName + '(' + employee.id + ')'}}">{{employee.fullName + '(' + employee.id + ')'}}</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <div class="saveBtn">
+  <a href="#/"><button type="submit" class="btn btn-info" ng-disabled="error || incomplete" ng-click="saveChanges()">&#10004; Save Changes</button></a>
+  </div>
+  </div>
+</form>

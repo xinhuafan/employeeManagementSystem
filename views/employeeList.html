@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="css/ems.css">
+<div class="ems-container" id="list-wrapper">
+<div class="row well">
+<a ng-href="#/addEmployee"><button type="button" class="btn btn-info pull-right">
+<i class="glyphicon glyphicon-plus"></i> Add New Employee</button></a>
+</div>
+<table class="ems-table ems-bordered ems-striped" border="solid">
+  <tbody>
+  <caption style="text-align: center"><h2>Employee List</h2></caption>
+  <br>
+  <tr>
+    <input type="search" ng-model="searchString" placeholder="global search" size="180"/>
+  </tr>
+  <br><br>
+  <tr>
+    <th style="text-align:center">Profile</th>
+    <th style="text-align:center">First Name</th>
+    <th style="text-align:center">Last Name</th>
+    <th style="text-align:center">Title</th>
+    <th style="text-align:center">Phone</th>
+    <th style="text-align:center">Email</th>
+    <th style="text-align:center">Department</th>
+    <th style="text-align:center">Manager</th>
+    <th style="text-align:center"># of Report To</th>
+    <th style="text-align:center">Action</th>
+  </tr>
+  </tbody>
+  <tbody class='list' infinite-scroll='loadMore()' infinite-scroll-distance='1' infinite-scroll-container="'#list-wrapper'" infinite-scroll-parent="true">
+  <tr ng-repeat="employee in employees | searchFor:searchString">
+       <td style="text-align:center" width="50px" height="50px"><img ng-src="{{ employee.image }}" style="display: block;" width="50px" height="50px"></img></td>
+       <td style="text-align:center">{{ employee.fName }}</td>
+       <td style="text-align:center">{{ employee.lName }}</td>
+       <td style="text-align:center">{{ employee.title }}</td>
+       <td style="text-align:center"><a href="tel:{{employee.phone}}">{{ employee.phone }}</a></td>
+       <td style="text-align:center"><a href="mailto:{{ employee.email }}">{{ employee.email }}</a></td>
+       <td style="text-align:center">{{ employee.department }}</td>   
+       <td style="text-align:center"><a href="#/employeeList/{{ employee.id }}/{{ employee.manager }}">{{ (employee.manager === null || employee.manager === 'undefined' || employee.manager === '') ? "N/A" : employee.manager.substring(0, employee.manager.indexOf("(")) }}</a></td>
+       <td style="text-align:center"><a href="#/employeeList/{{ employee.id }}/{{ employee.fName }}/{{ employee.lName }}">{{ employee.reports }}</a></td>
+    <td style="text-align:center">
+      <a ng-href="#/editEmployee/{{employee.id}}"><button class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></button></a>
+      <button class="btn btn-danger" ng-click="deleteEmployee(employee.id)"><i class="glyphicon glyphicon-trash"></i></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
